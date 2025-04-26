@@ -17,6 +17,10 @@
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
+<<<<<<< HEAD
+=======
+    "mongoose": "^8.14.0",
+>>>>>>> 3f8818e96dc400d52041b267b3de8d4e1d1fa80e
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "socket.io": "^4.8.1"
