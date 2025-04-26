@@ -338,6 +338,11 @@
                 .addEventListener("click", function () {
                     socket.emit("startVideoCall", { room })
                 })
+                
+            document.querySelector("#logout-btn")
+                .addEventListener("click", function () {
+                    window.location.href = "/"
+                })
 
             socket.on("incomingCall", function () {
                 console.log("hey");

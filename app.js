@@ -2,11 +2,17 @@ const express = require("express");
 const app = express();
 const indexRouter = require("./routes/index");
 const path = require("path");
-
+const expressSession = require("express-session");
+const authRouter = require("./routes/auth");
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
 const io = socketIO(server);
+const ConnectToDB = require("./config/mongoose-connection");
+const passport = require("passport");
+ConnectToDB();
+require("dotenv").config();
+require('./config/googleOauth');
 
 let waitingusers = [];
 let rooms = {};
@@ -54,13 +60,16 @@ io.on("connection", function (socket) {
     waitingusers.splice(index, 1);
   });
 });
-
+require('dotenv').config();
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(expressSession({ secret: process.env.EXPRESS_SECRET, resave: false, saveUninitialized: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/auth", authRouter);
 
 server.listen(process.env.PORT || 3000 , () => {
   console.log("listening on port 3000");
