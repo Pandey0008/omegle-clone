@@ -71,6 +71,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 
-server.listen(process.env.PORT || 3000 , () => {
+server.listen(process.env.PORT || 3003 , () => {
   console.log("listening on port 3000");
 });
